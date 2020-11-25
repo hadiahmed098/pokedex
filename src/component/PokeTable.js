@@ -13,7 +13,6 @@ class PokeTable extends React.Component {
     async getAPIData() {
         // This code is provided, it can be complicated
         const url = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=" + this.state.offset; // URL of the API
-        console.log(url);
         const response = await fetch(url); // Get the data from the PokeAPI
         const responseJSON = await response.json(); // Turn the data into a JSON object that we can use
         
