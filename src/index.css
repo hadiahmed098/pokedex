@@ -33,6 +33,14 @@ textarea {
     color: #525252;
 }
 
+.header-link {
+    color: #525252;
+}
+
+.header-link:hover {
+    color: #333333;
+}
+
 #app {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
