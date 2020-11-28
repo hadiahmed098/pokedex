@@ -1,4 +1,5 @@
 import React from 'react';
+import PokeCard from './PokeCard';
 
 class Search extends React.Component {
     constructor(props) {
@@ -12,32 +13,46 @@ class Search extends React.Component {
 
     // Use async so your page can continue loading
     async getAPIData() {
-        // This code is provided, it can be complicated
-        const url = "https://pokeapi.co/api/v2/pokemon/" + this.state.value; // URL of the API
-        const response = await fetch(url); // Get the data from the PokeAPI
-          
-        console.log(response);
+        let dropdown = document.getElementById("search-type");
+        let search_type = dropdown.value;
 
-        if(response.statusText === "Not Found") {
-            this.setState(
-                {
-                    result: <div className="pokecard">Not Found!</div>
-                }
-            );
+        if(search_type === "pokemon") {
+            const url = "https://pokeapi.co/api/v2/pokemon/" + this.state.value; // URL of the API
+            const response = await fetch(url); // Get the data from the PokeAPI
+
+            if(response.statusText === "Not Found") {
+                this.setState(
+                    {
+                        result: <div className="pokecard">Not Found!</div>
+                    }
+                );
+            } else {
+                this.setState(
+                    {
+                        result: <PokeCard key={this.state.value} name={this.state.value} url={"https://pokeapi.co/api/v2/pokemon/" + this.state.value} />
+                    }
+                );
+            }
         } else {
-            const responseJSON = await response.json(); // Turn the data into a JSON object that we can use
-            this.setState(
-                {
-                    result: <div className="pokecard">
-                    <img src={responseJSON.sprites.front_default} alt={responseJSON.species.name} title={responseJSON.species.name} />
-                    <h4>{responseJSON.species.name.charAt(0).toUpperCase() + responseJSON.species.name.slice(1)}</h4>
-                    <p>Height: {responseJSON.height}</p>
-                    <p>Weight: {responseJSON.weight}</p>
-                    <p>Base XP: {responseJSON.base_experience}</p>
-                </div>
-                }
-            );
-        }
+            const url = "https://pokeapi.co/api/v2/type/" + this.state.value; // URL of the API
+            const response = await fetch(url); // Get the data from the PokeAPI
+
+            if(response.statusText === "Not Found") {
+                this.setState(
+                    {
+                        result: <div className="pokecard">Not Found!</div>
+                    }
+                );
+            } else {
+                const responseJSON = await response.json();
+                const pokemon = responseJSON.pokemon.map((element) => <PokeCard key={element.pokemon.name} name={element.pokemon.name} url={element.pokemon.url} />);
+                this.setState(
+                    {
+                        result: pokemon
+                    }
+                );
+            }
+        }        
     }
 
     handleChange(event) {
@@ -58,6 +73,10 @@ class Search extends React.Component {
             <div className="searchbar">
                 <span className="searchbutton" onClick={this.handleSearch}><b>Search</b></span>
                 <input className="searchfield" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Query..." />
+                <select name="search-type" id="search-type">
+                    <option value="pokemon">Pokemon</option>
+                    <option value="type">Type</option>
+                </select>
             </div>
             <div className="searchresult">
                 {this.state.result}

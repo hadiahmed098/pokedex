@@ -51,32 +51,32 @@ class PokeCard extends React.Component {
 
     render () {
         // Get the images of the pokemon
-        const front_img = <div><img src={this.state.imgsrc_mF} alt={this.state.name}/><img src={this.state.imgsrc_sF} alt={this.state.name}/></div>;
-        const back_img = <div><img src={this.state.imgsrc_mB} alt={this.state.name}/><img src={this.state.imgsrc_sB} alt={this.state.name}/></div>
+        const front_img = <div><img src={this.state.imgsrc_mF} alt={this.state.name} width={"96px"} height={"auto"}/><img src={this.state.imgsrc_sF} alt={this.state.name} width={"96px"} height={"auto"}/></div>;
+        const back_img = <div><img src={this.state.imgsrc_mB} alt={this.state.name} width={"96px"} height={"auto"}/><img src={this.state.imgsrc_sB} alt={this.state.name} width={"96px"} height={"auto"}/></div>
 
         // Get the background style
-        let bg_color = {"background-color": "white"};
+        let bg_color = {"backgroundColor": "white"};
         switch (this.state.maintype) {
-            case "normal": bg_color["background-color"] = "#969696"; break;
-            case "fire": bg_color["background-color"] = "#db7f58"; break;
-            case "water": bg_color["background-color"] = "#90aaf5"; break;
-            case "grass": bg_color["background-color"] = "#85cc99"; break;
-            case "electric": bg_color["background-color"] = "#fae891"; break;
-            case "ice": bg_color["background-color"] = "#b7edeb"; break;
-            case "fighting": bg_color["background-color"] = "#d96a6a"; break;
-            case "flying": bg_color["background-color"] = "#d7b2ed"; break;
-            case "poison": bg_color["background-color"] = "#ad6f9c"; break;
-            case "ground": bg_color["background-color"] = "#e3e1a3"; break;
-            case "bug": bg_color["background-color"] = "#d5e096"; break;
-            case "rock": bg_color["background-color"] = "#bfb36b"; break;
-            case "psychic": bg_color["background-color"] = "#bd82a3"; break;
-            case "ghost": bg_color["background-color"] = "#9882bd"; break;
-            case "dark": bg_color["background-color"] = "#a69265"; break;
-            case "steel": bg_color["background-color"] = "#d9d9d9"; break;
-            case "fairy": bg_color["background-color"] = "#ffe8f9"; break;
-            case "dragon": bg_color["background-color"] = "#9e5ecc"; break;
-            case "unknown": bg_color["background-color"] = "#00000"; break;
-            case "shadow": bg_color["background-color"] = "#00000"; break;        
+            case "normal": bg_color["backgroundColor"] = "#969696"; break;
+            case "fire": bg_color["backgroundColor"] = "#db7f58"; break;
+            case "water": bg_color["backgroundColor"] = "#90aaf5"; break;
+            case "grass": bg_color["backgroundColor"] = "#85cc99"; break;
+            case "electric": bg_color["backgroundColor"] = "#fae891"; break;
+            case "ice": bg_color["backgroundColor"] = "#b7edeb"; break;
+            case "fighting": bg_color["backgroundColor"] = "#d96a6a"; break;
+            case "flying": bg_color["backgroundColor"] = "#d7b2ed"; break;
+            case "poison": bg_color["backgroundColor"] = "#ad6f9c"; break;
+            case "ground": bg_color["backgroundColor"] = "#e3e1a3"; break;
+            case "bug": bg_color["backgroundColor"] = "#d5e096"; break;
+            case "rock": bg_color["backgroundColor"] = "#bfb36b"; break;
+            case "psychic": bg_color["backgroundColor"] = "#bd82a3"; break;
+            case "ghost": bg_color["backgroundColor"] = "#9882bd"; break;
+            case "dark": bg_color["backgroundColor"] = "#a69265"; break;
+            case "steel": bg_color["backgroundColor"] = "#d9d9d9"; break;
+            case "fairy": bg_color["backgroundColor"] = "#ffe8f9"; break;
+            case "dragon": bg_color["backgroundColor"] = "#9e5ecc"; break;
+            case "unknown": bg_color["backgroundColor"] = "#00000"; break;
+            case "shadow": bg_color["backgroundColor"] = "#00000"; break;        
             default:
                 break;
         }
@@ -84,7 +84,7 @@ class PokeCard extends React.Component {
 
         // Card to display
         const pokeCard = 
-        <div className="pokecard" style={bg_color} onClick={this.readMore}>
+        <div className="pokecard" onClick={this.readMore}>
             <div onMouseOver={this.swapImages} onMouseOut={this.swapImages}>
                 {this.state.front ? front_img : back_img }
             </div>
@@ -92,8 +92,8 @@ class PokeCard extends React.Component {
             <p>Height: {this.state.height}</p>
             <p>Weight: {this.state.weight}</p>
             <p>Base XP: {this.state.basexp}</p>
-            <p>Type: {this.state.maintype.charAt(0).toUpperCase() + this.state.maintype.slice(1)}</p>
-            {/*this.state.readmore ? <a className="readmore-link" href={"details?poke="+this.state.name}><div className="readmore">Read More</div></a> : <div></div>*/}
+            <div style={bg_color} className="pokecard-type"><p>Type: {this.state.maintype.charAt(0).toUpperCase() + this.state.maintype.slice(1)}</p></div>
+            <div className="readmore"><a className="readmore-link" href={"details?poke="+this.state.name}>Read More</a></div>
         </div>;
         
 

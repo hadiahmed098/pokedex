@@ -42,17 +42,25 @@ textarea {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .pokecard {
     color: #4a4a4a;
+    background-color: #cfcfcf;
     font-size: 20px;
     padding: 15px;
     margin: 10px;
     width: 200px;
     height: auto;
     border-radius: 10px;
+}
+
+.pokecard-type {
+    color: black;
+    border-radius: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 .button {
@@ -78,7 +86,10 @@ textarea {
 }
 
 .searchresult {
-    display: inline-block;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .searchbutton {
@@ -97,14 +108,15 @@ textarea {
 }
 
 .readmore {
-    background-color: white;
-    padding: 2px 2px;
+    background-color: #e0ddda;
+    border: 1px solid gray;
     border-radius: 3px;
+    margin-top:10px;
     cursor: pointer;
 }
 
 .readmore:hover {
-    background-color: lightgray;
+    background-color: #f6efe8;
 }
 
 .readmore-link {
@@ -112,6 +124,5 @@ textarea {
 }
 
 .readmore-link:hover {
-    text-decoration: underline;
     color: #4a4a4a
 }
