@@ -1,12 +1,14 @@
 import React from 'react';
 import PokeCard from './PokeCard';
+import Details from './Details';
 
 class PokeTable extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {pokemon: [], offset: 0};
+        this.state = {pokemon: [], offset: 0, detailView: null};
         this.getAPIData = this.getAPIData.bind(this);
+        this.getDetailView = this.getDetailView.bind(this);
     }
 
     // Use async so your page can continue loading
@@ -16,7 +18,7 @@ class PokeTable extends React.Component {
         const response = await fetch(url); // Get the data from the PokeAPI
         const responseJSON = await response.json(); // Turn the data into a JSON object that we can use
         
-        const responseCards = responseJSON.results.map((item) => <PokeCard key={item.name} name={item.name} url={item.url} />);
+        const responseCards = responseJSON.results.map((item) => <PokeCard key={item.name} name={item.name} url={item.url} sendData={this.getDetailView} />);
         
         this.setState(
             {
@@ -24,6 +26,10 @@ class PokeTable extends React.Component {
                 offset: this.state.offset + 10
             }
         );
+    }
+
+    getDetailView(pokemon) {
+        this.setState({detailView: pokemon});
     }
 
     componentDidMount() {
@@ -40,9 +46,7 @@ class PokeTable extends React.Component {
         <div className="button" onClick={this.getAPIData}><span className="button-text"><b>Load more...</b></span></div>
         </div>;
         
-
-        // Return some JSX here...
-        return pokeTable;
+        return (this.state.detailView == null ? pokeTable : <Details name={this.state.detailView} sendData={this.getDetailView}/>)
     }
 }
 

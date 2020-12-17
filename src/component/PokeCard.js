@@ -1,5 +1,4 @@
 import React from 'react';
-import Details from './Details';
 
 class PokeCard extends React.Component {
     constructor(props) {
@@ -47,7 +46,7 @@ class PokeCard extends React.Component {
     }
 
     readMore() {
-        this.setState({readmore: !this.state.readmore});
+        this.props.sendData(this.state.name);
     }
 
     render () {
@@ -95,7 +94,6 @@ class PokeCard extends React.Component {
             <p>Base XP: {this.state.basexp}</p>
             <div style={bg_color} className="pokecard-type"><p>Type: {this.state.maintype.charAt(0).toUpperCase() + this.state.maintype.slice(1)}</p></div>
             <div className="readmore" onClick={this.readMore}>Read More</div>
-            {this.state.readmore ? <Details name={this.props.name} url={this.props.url} /> : <div />}
         </div>;
         
 
